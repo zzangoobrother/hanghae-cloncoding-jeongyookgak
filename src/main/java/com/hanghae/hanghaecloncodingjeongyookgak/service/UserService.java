@@ -60,52 +60,50 @@ public class UserService {
         User user = new User(email, pw, nickname);
         return userRepository.save(user);
     }
-}
 
 
-//        // 로그인
-//        public User login (UserRequestDto requestDto)throw HanghaeClonException {
-//            User user = userRepository.findByEmail(requestDto.getEmail()).orElseThrow(
-//                    () -> new HanghaeClonException(ErrorCode.USER_NOT_FOUND)
-//            );
-//
-//            //패스워드 암호화
-//            if (!passwordEncoder.matches(requestDto.getPw(), user.getPw())) {
-//                throw new HanghaeClonException(ErrorCode.USER_NOT_FOUND);
-//            }
-//            return user;
-//        }
-//
+        // 로그인
+        public User login (UserRequestDto requestDto) throws HanghaeClonException {
+            User user = userRepository.findByEmail(requestDto.getEmail()).orElseThrow(
+                    () -> new HanghaeClonException(ErrorCode.USER_NOT_FOUND)
+            );
 
-//        //email 중복
-//        public Map<String, String> sameId (UserRequestDto userRequstDto){
-//            User user = userRepository.findByEmail(userRequstDto.getEmail()).orElseThrow(null);
-//
-//            Map<String, String> result = new HashMap<>();
-//            if (user == null) {
-//                result.put("result", "success");
-//                return result;
-//            }
-//
-//            result.put("result", "fail");
-//            result.put("message", "중복된 email이 있습니다.");
-//            return result;
-//        }
-//        //닉네임 중복
-//        public Map<String, String> sameNickname (SignUpRequestDto signUpRequestDto){
-//            User user = userRepository.findByNickname(signUpRequestDto.getNickname()).orElseThrow();
-//            Map<String, String> result = new HashMap<>();
-//            if (user == null) {
-//                result.put("result", "success");
-//                return result;
-//            }
-//
-//            result.put("result", "fail");
-//            result.put("message", "중복된 nickname이 있습니다.");
-//            return result;
-//        }
-//    }
-//}
+            //패스워드 암호화
+            if (!passwordEncoder.matches(requestDto.getPw(), user.getPw())) {
+                throw new HanghaeClonException(ErrorCode.USER_NOT_FOUND);
+            }
+            return user;
+        }
+
+
+        //email 중복
+        public Map<String, String> sameId (UserRequestDto userRequstDto){
+            User user = userRepository.findByEmail(userRequstDto.getEmail()).orElseThrow(null);
+
+            Map<String, String> result = new HashMap<>();
+            if (user == null) {
+                result.put("result", "success");
+                return result;
+            }
+            result.put("result", "fail");
+            result.put("message", "중복된 email이 있습니다.");
+            return result;
+        }
+        //닉네임 중복
+        public Map<String, String> sameNickname (SignUpRequestDto signUpRequestDto){
+            User user = userRepository.findByNickname(signUpRequestDto.getNickname()).orElseThrow(null);
+            Map<String, String> result = new HashMap<>();
+            if (user == null) {
+                result.put("result", "success");
+                return result;
+            }
+
+            result.put("result", "fail");
+            result.put("message", "중복된 nickname이 있습니다.");
+            return result;
+        }
+    }
+
 
 
 
