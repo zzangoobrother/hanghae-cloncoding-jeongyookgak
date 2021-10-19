@@ -30,4 +30,11 @@ public class Product {
     @Column
     private String imageDetail;
 
+    public Product(String category, String title, Long price, String image, String imageDetail) {
+        this.category = category;
+        this.title = title;
+        this.price = price;
+        this.image = image;
+        this.imageDetail = imageDetail;
+    }
 }

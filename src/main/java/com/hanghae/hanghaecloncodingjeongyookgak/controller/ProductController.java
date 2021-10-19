@@ -4,8 +4,6 @@ import com.hanghae.hanghaecloncodingjeongyookgak.model.Product;
 import com.hanghae.hanghaecloncodingjeongyookgak.service.ProductService;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @RestController

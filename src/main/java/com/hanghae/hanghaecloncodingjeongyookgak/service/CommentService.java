@@ -24,21 +24,24 @@ public class CommentService {
     }
 
     public List<Comment> getComments(Long productId) {
-        return commentRepository.findAllByProductOrderByModifiedDateDesc(productId);
+        Product product = productRepository.findById(productId).orElseThrow(
+                () -> new HanghaeClonException(ErrorCode.PRODUCT_NOT_FOUND)
+        );
+        return commentRepository.findAllByProductOrderByModifiedDateDesc(product);
     }
 
     public List<Comment> createComment(CommentRequestDto commentRequestDto, UserDetails userDetails) {
         Product product = productRepository.findById(commentRequestDto.getProductId()).orElseThrow(
-                () -> new HanghaeClonException(ErrorCode.USER_NOT_FOUND)
+                () -> new HanghaeClonException(ErrorCode.PRODUCT_NOT_FOUND)
         );
-
+        System.out.println(product);
         Comment comment = new Comment(commentRequestDto.getTitle(), commentRequestDto.getContent(), "닉네임", product);
         Comment saveComment = commentRepository.save(comment);
 
-        return commentRepository.findAllByProductOrderByModifiedDateDesc(saveComment.getProduct().getId());
+        return commentRepository.findAllByProductOrderByModifiedDateDesc(saveComment.getProduct());
     }
 
-    public void deleteComment(CommentRequestDto commentRequestDto) {
-        commentRepository.deleteById(commentRequestDto.getCommentId());
+    public void deleteComment(Long commentId) {
+        commentRepository.deleteById(commentId);
     }
 }

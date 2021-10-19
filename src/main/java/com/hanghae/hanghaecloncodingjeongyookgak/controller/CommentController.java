@@ -45,9 +45,9 @@ public class CommentController {
     }
 
     // 상품 리뷰 삭제
-    @DeleteMapping("/api/detail/review")
-    public Map<String, Object> deleteComment(@RequestBody CommentRequestDto commentRequestDto) {
-        commentService.deleteComment(commentRequestDto);
+    @DeleteMapping("/api/detail/review/{commentId}")
+    public Map<String, Object> deleteComment(@PathVariable Long commentId) {
+        commentService.deleteComment(commentId);
 
         Map<String, Object> result = new HashMap<>();
         result.put("result", "success");
