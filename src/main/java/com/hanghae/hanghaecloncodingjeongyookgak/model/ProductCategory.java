@@ -1,30 +1,28 @@
 package com.hanghae.hanghaecloncodingjeongyookgak.model;
 
-import com.hanghae.hanghaecloncodingjeongyookgak.exception.HanghaeClonException;
-import org.springframework.http.HttpStatus;
-
-import java.util.Arrays;
-
 public enum ProductCategory {
-    PORK,
-    BEEF,
-    CHICKEN,
-    SEAFOOD,
-    MEALKIT,
-    MILK,
-    EGG,
-    BABY;
+    PORK("pork"),
+    BEEF("beef"),
+    CHICKEN("chicken"),
+    SEAFOOD("seafood"),
+    MEALKIT("mealkit"),
+    MILK("milk"),
+    EGG("egg"),
+    BABY("baby");
 
-//    private String category;
-//
-//    ProductCategory(String category) {
-//        this.category = category;
-//    }
-//
-//    public static ProductCategory findCategory(String category) {
-//        return Arrays.stream(ProductCategory.values())
-//                .filter(v -> v.category.equals(category))
-//                .findFirst()
-//                .orElseThrow(() -> new HanghaeClonException())
-//    }
+    private final String category;
+
+    ProductCategory(String category) {
+        this.category = category;
+    }
+
+    public static ProductCategory categoryOf(String category) {
+        for (ProductCategory productCategory : ProductCategory.values()) {
+            if (category.equalsIgnoreCase(productCategory.toString())) {
+                return productCategory;
+            }
+        }
+
+        throw new IllegalArgumentException("올바른 카테고리가 아닙니다.");
+    }
 }

@@ -1,5 +1,6 @@
 package com.hanghae.hanghaecloncodingjeongyookgak.model;
 
+import com.hanghae.hanghaecloncodingjeongyookgak.dto.ProductRequestDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,7 +17,8 @@ public class Product {
     private Long id;
 
     @Column
-    private String category;
+    @Enumerated(value = EnumType.STRING)
+    private ProductCategory category;
 
     @Column
     private String title;
@@ -30,11 +32,19 @@ public class Product {
     @Column
     private String imageDetail;
 
-    public Product(String category, String title, Long price, String image, String imageDetail) {
+    public Product(ProductCategory category, String title, Long price, String image, String imageDetail) {
         this.category = category;
         this.title = title;
         this.price = price;
         this.image = image;
         this.imageDetail = imageDetail;
+    }
+
+    public Product(ProductRequestDto productRequestDto) {
+        this.category = ProductCategory.categoryOf(productRequestDto.getCategory());
+        this.title = productRequestDto.getTitle();
+        this.price = productRequestDto.getPrice();
+        this.image = productRequestDto.getImage();
+        this.imageDetail = productRequestDto.getImageDetail();
     }
 }

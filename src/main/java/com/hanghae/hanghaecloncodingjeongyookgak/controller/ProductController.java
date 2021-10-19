@@ -1,5 +1,6 @@
 package com.hanghae.hanghaecloncodingjeongyookgak.controller;
 
+import com.hanghae.hanghaecloncodingjeongyookgak.dto.ProductRequestDto;
 import com.hanghae.hanghaecloncodingjeongyookgak.model.Product;
 import com.hanghae.hanghaecloncodingjeongyookgak.service.ProductService;
 import org.springframework.web.bind.annotation.*;
@@ -23,13 +24,13 @@ public class ProductController {
 
     // 상품 단건 조회
     @GetMapping("/api/detail")
-    public Map<String, String> getProduct(@RequestParam Long productId) {
+    public Map<String, Object> getProduct(@RequestParam Long productId) {
         return productService.getProduct(productId);
     }
 
     // 상품 등록위해 구현
     @PostMapping("/api/product")
-    public Product createProduct(@RequestBody Product product) {
-        return productService.createProduct(product);
+    public Product createProduct(@RequestBody ProductRequestDto ProductRequestDto) {
+        return productService.createProduct(ProductRequestDto);
     }
 }
