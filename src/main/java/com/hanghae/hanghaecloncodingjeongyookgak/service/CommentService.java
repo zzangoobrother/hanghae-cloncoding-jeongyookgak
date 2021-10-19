@@ -10,7 +10,9 @@ import com.hanghae.hanghaecloncodingjeongyookgak.repository.ProductRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class CommentService {
@@ -23,14 +25,20 @@ public class CommentService {
         this.commentRepository = commentRepository;
     }
 
-    public List<Comment> getComments(Long productId) {
+    public Map<String, Object> getComments(Long productId) {
         Product product = productRepository.findById(productId).orElseThrow(
                 () -> new HanghaeClonException(ErrorCode.PRODUCT_NOT_FOUND)
         );
-        return commentRepository.findAllByProductOrderByModifiedDateDesc(product);
+        List<Comment> comments = commentRepository.findAllByProductOrderByModifiedDateDesc(product);
+
+        Map<String, Object> result = new HashMap<>();
+        result.put("comments", comments);
+        result.put("result", "success");
+
+        return result;
     }
 
-    public List<Comment> createComment(CommentRequestDto commentRequestDto, UserDetails userDetails) {
+    public Map<String, Object> createComment(CommentRequestDto commentRequestDto, UserDetails userDetails) {
         Product product = productRepository.findById(commentRequestDto.getProductId()).orElseThrow(
                 () -> new HanghaeClonException(ErrorCode.PRODUCT_NOT_FOUND)
         );
@@ -38,7 +46,13 @@ public class CommentService {
         Comment comment = new Comment(commentRequestDto.getTitle(), commentRequestDto.getContent(), "닉네임", product);
         Comment saveComment = commentRepository.save(comment);
 
-        return commentRepository.findAllByProductOrderByModifiedDateDesc(saveComment.getProduct());
+        List<Comment> comments = commentRepository.findAllByProductOrderByModifiedDateDesc(saveComment.getProduct());
+
+        Map<String, Object> result = new HashMap<>();
+        result.put("comments", comments);
+        result.put("result", "success");
+
+        return result;
     }
 
     public void deleteComment(Long commentId) {
