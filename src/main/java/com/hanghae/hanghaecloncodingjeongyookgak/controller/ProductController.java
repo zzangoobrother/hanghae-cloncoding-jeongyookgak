@@ -2,9 +2,7 @@ package com.hanghae.hanghaecloncodingjeongyookgak.controller;
 
 import com.hanghae.hanghaecloncodingjeongyookgak.model.Product;
 import com.hanghae.hanghaecloncodingjeongyookgak.service.ProductService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
@@ -48,5 +46,9 @@ public class ProductController {
         return result;
     }
 
-
+    // 상품 등록위해 구현
+    @PostMapping("/api/product")
+    public Product createProduct(@RequestBody Product product) {
+        return productService.createProduct(product);
+    }
 }

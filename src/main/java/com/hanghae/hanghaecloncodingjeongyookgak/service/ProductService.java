@@ -30,4 +30,8 @@ public class ProductService {
                 () -> new HanghaeClonException(ErrorCode.PRODUCT_NOT_FOUND)
         );
     }
+
+    public Product createProduct(Product product) {
+        return productRepository.save(product);
+    }
 }
