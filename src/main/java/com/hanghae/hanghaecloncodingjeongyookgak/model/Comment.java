@@ -25,14 +25,14 @@ public class Comment extends Timestamped {
     @Column(nullable = false)
     private String nickname;
 
-    @Column
-    private LocalDateTime createdDate;
-
-    @Column
-    private LocalDateTime modifiedDate;
-
     @ManyToOne
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
+    public Comment(String title, String content, String nickname, Product product) {
+        this.title = title;
+        this.content = content;
+        this.nickname = nickname;
+        this.product = product;
+    }
 }
