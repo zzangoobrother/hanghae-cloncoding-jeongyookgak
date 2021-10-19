@@ -62,20 +62,28 @@ public class CartService {
     public List<Map<String, Object>> readCart(UserdetailsImpl userDetails) {
 
         username = userDetails.getUser().getUsername;
-        List<Product> products = productRepository.findByUsername(username);
-        List<Map<String, Object>> responseObject = new ArrayList<>();
+        List<Cart> carts = cartRepository.findAllByUsername(username);
+        List<CartResponseDto> cartResponseDtos = new ArrayList<>();
+        Long totalPrice = 0L;
 
-        Long totalPrice = products
-                .stream()
-                .mapToLong(Product::getPrice)
-                .sum()
-                ;
+        for (Cart cart : carts) {
+            CartResponseDto cartResponseDto = new CartResponseDto(
+                    cart.getProduct().getId(),
+                    cart.getProduct().getTitle(),
+                    cart.getProduct().getPrice(),
+                    cart.getProduct().getImage()
+            );
+
+            Long price = cart.getProduct().getPrice() * cart.getCartCount();
+            totalPrice += price;
+            cartResponseDtos.add(cartResponseDto);
+        }
 
         List<Map<String,Object>> readObject = new ArrayList<>();
         Map<String,Object> responseDtoMap = new HashMap<String ,Object>();
         Map<String,Object> responsePriceMap = new HashMap<String ,Object>();
 
-        responseDtoMap.put("products", products);
+        responseDtoMap.put("carts", cartResponseDtos);
         responsePriceMap.put("totalPrice", totalPrice);
         readObject.add(responsePriceMap);
         readObject.add(responseDtoMap);
