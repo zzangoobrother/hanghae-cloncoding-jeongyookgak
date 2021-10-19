@@ -37,12 +37,21 @@ public class UserController {
     public Map<String, String> registerUser(@RequestBody SignUpRequestDto requestDto) throws HanghaeClonException{
         User user = userService.registerUser(requestDto);
         Map<String, String> result = new HashMap<>();
-        result.put("result", "successs");
-        result.put("id", String.valueOf(user.getId()));
+            result.put("result", "successs");
+            return result;
+    }
+
+    //로그인
+    @PostMapping("/api/login")
+    public Map<String,String> login(@RequestBody UserRequestDto requestDto) throws HanghaeClonException{
+        User user = userService.login(requestDto);
+
+        Map<String,String> result = new HashMap<>();
+        result.put("token",jwtTokenProvider.createToken(user.getEmail(), user.getEmail(),user.getNickname()));
         result.put("email", user.getEmail());
-        result.put("nickname", user.getNickname());
+        result.put("nickname",user.getNickname());
+        result.put("result", "success");
 
         return result;
     }
-
 }
