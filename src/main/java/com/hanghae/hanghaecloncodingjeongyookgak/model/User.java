@@ -1,5 +1,9 @@
 package com.hanghae.hanghaecloncodingjeongyookgak.model;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,7 +21,7 @@ public class User {
     @Id
     private Long id;
 
-    @Column (nullable = false)
+    @Column(nullable = false)
     private String email;
 
     @Column (nullable = false)

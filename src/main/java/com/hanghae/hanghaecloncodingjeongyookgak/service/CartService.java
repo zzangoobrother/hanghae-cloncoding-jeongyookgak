@@ -62,7 +62,7 @@ public class CartService {
     public List<Map<String, Object>> readCart(UserdetailsImpl userDetails) {
 
         username = userDetails.getUser().getUsername;
-        List<Cart> carts = cartRepository.findAllByUsername(username);
+        List<Cart> carts = cartRepository.findAllByUserNickname(username);
         List<CartResponseDto> cartResponseDtos = new ArrayList<>();
         Long totalPrice = 0L;
 

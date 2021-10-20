@@ -20,7 +20,7 @@ public class Cart extends Timestamped {
 
     @Column(nullable = false)
     private Long cartCount;
-
+ 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
