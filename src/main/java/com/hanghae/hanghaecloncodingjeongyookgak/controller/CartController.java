@@ -20,9 +20,9 @@ public class CartController {
 
 
     @PostMapping("/api/cart")
-    public List<Map<String, Object>> addCart(@RequestBody CartRequestDto cartRequestDto){
+    public List<Map<String, Object>> addCart(@AuthenticationPrincipal UserDetailsImpl userDetails, @RequestBody CartRequestDto cartRequestDto){
 
-        return cartService.addCart(cartRequestDto);
+        return cartService.addCart(cartRequestDto, userDetails);
     }
 
     @GetMapping("/api/cart")

@@ -30,4 +30,10 @@ public class Cart {
         this.cartCount = cartCount;
         this.product = product;
     }
+
+    public Cart(Long cartCount, Product product, User user) {
+        this.cartCount = cartCount;
+        this.product = product;
+        this.user = user;
+    }
 }
