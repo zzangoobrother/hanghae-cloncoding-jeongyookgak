@@ -32,7 +32,7 @@ public class JwtTokenProvider {
     @PostConstruct
     protected  void init(){
 
-        secretkey = Base64.getEncoder().encodeToString(secretkey.getBytes(StandardCharsets.UTF_8));
+        secretkey = Base64.getEncoder().encodeToString(secretkey.getBytes());
     }
 
 

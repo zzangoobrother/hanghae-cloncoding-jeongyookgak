@@ -1,6 +1,7 @@
 package com.hanghae.hanghaecloncodingjeongyookgak.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.hanghae.hanghaecloncodingjeongyookgak.security.HtmlCharacterEscapes;
 import lombok.RequiredArgsConstructor;
 import org.apache.tomcat.util.http.Rfc6265CookieProcessor;
 import org.apache.tomcat.util.http.SameSiteCookies;
@@ -26,6 +27,12 @@ public class WebConfig implements WebMvcConfigurer {
     }
 
     @Bean
+    public MappingJackson2HttpMessageConverter jsonEscapeConverter() {
+        ObjectMapper copy = objectMapper.copy();
+        copy.getFactory().setCharacterEscapes(new HtmlCharacterEscapes());
+        return new MappingJackson2HttpMessageConverter(copy);
+    }
+    @Bean
     public TomcatContextCustomizer sameSiteCookesConfig() {
         return context -> {
             final Rfc6265CookieProcessor cookieProcessor = new Rfc6265CookieProcessor();
@@ -33,11 +40,4 @@ public class WebConfig implements WebMvcConfigurer {
             context.setCookieProcessor(cookieProcessor);
         };
     }
-
-//    @Bean
-//    public MappingJackson2HttpMessageConverter jsonEscapeConverter() {
-//        ObjectMapper copy = objectMapper.copy();
-//        copy.getFactory().setCharacterEscapes(new HtmlCharacterEscapes());
-//        return new MappingJackson2HttpMessageConverter(copy);
-//    }
 }
