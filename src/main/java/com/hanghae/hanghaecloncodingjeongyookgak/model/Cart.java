@@ -16,7 +16,7 @@ public class Cart {
     private Long id;
 
     @Column(nullable = false)
-    private Long count;
+    private Long cartCount;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
@@ -26,4 +26,8 @@ public class Cart {
     @JoinColumn(name = "product_id", nullable = false)
     private Product product;
 
+    public Cart(Long cartCount, Product product) {
+        this.cartCount = cartCount;
+        this.product = product;
+    }
 }

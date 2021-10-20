@@ -1,8 +1,12 @@
 package com.hanghae.hanghaecloncodingjeongyookgak.repository;
 
 import com.hanghae.hanghaecloncodingjeongyookgak.model.User;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-public class UserRepository {
+public interface UserRepository extends JpaRepository<User,Long> {
+
+    Optional<User> findByEmail(String email);
+    Optional<User> findByNickname(String nickname);
 }
