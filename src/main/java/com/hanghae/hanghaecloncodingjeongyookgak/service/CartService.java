@@ -6,7 +6,6 @@ import com.hanghae.hanghaecloncodingjeongyookgak.model.Cart;
 import com.hanghae.hanghaecloncodingjeongyookgak.model.Product;
 import com.hanghae.hanghaecloncodingjeongyookgak.repository.CartRepository;
 import com.hanghae.hanghaecloncodingjeongyookgak.repository.ProductRepository;
-import com.hanghae.hanghaecloncodingjeongyookgak.security.UserDetailsImpl;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -60,9 +59,9 @@ public class CartService {
 
 
 
-    public List<Map<String, Object>> readCart(UserDetailsImpl userDetails) {
+    public List<Map<String, Object>> readCart(UserdetailsImpl userDetails) {
 
-        username = userDetails.getUser().getNickname();
+        username = userDetails.getUser().getUsername;
         List<Cart> carts = cartRepository.findAllByUserNickname(username);
         List<CartResponseDto> cartResponseDtos = new ArrayList<>();
         Long totalPrice = 0L;
