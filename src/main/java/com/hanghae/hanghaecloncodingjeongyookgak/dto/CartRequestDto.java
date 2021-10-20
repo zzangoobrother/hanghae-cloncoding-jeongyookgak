@@ -10,6 +10,7 @@ public class CartRequestDto {
 
     private Long productId;
     private Long count;
+    private String nickname;
 
     public CartRequestDto(Long productId, Long count) {
         this.productId = productId;

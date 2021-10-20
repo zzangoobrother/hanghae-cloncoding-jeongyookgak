@@ -10,6 +10,7 @@ import com.hanghae.hanghaecloncodingjeongyookgak.security.jwt.JwtTokenProvider;
 import com.hanghae.hanghaecloncodingjeongyookgak.security.jwt.JwtTokenProvider;
 import com.hanghae.hanghaecloncodingjeongyookgak.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -50,6 +51,21 @@ public class UserController {
         result.put("token",jwtTokenProvider.createToken(user.getEmail(), user.getEmail(),user.getNickname()));
         result.put("email", user.getEmail());
         result.put("nickname",user.getNickname());
+        result.put("result", "success");
+
+        return result;
+    }
+
+    // 로그인 체크
+    @GetMapping("/api/login/check")
+    public Map<String, String> loginCheck(@AuthenticationPrincipal UserDetailsImpl userDetails) {
+        if (userDetails == null) {
+            throw new HanghaeClonException(ErrorCode.LOGIN_TOKEN_EXPIRE);
+        }
+
+        Map<String, String> result = new HashMap<>();
+        result.put("email", userDetails.getUser().getEmail());
+        result.put("nickname", userDetails.getUser().getNickname());
         result.put("result", "success");
 
         return result;
