@@ -1,6 +1,8 @@
 package com.hanghae.hanghaecloncodingjeongyookgak.controller;
 
+import com.hanghae.hanghaecloncodingjeongyookgak.dto.CategoryImageRequestDto;
 import com.hanghae.hanghaecloncodingjeongyookgak.dto.ProductRequestDto;
+import com.hanghae.hanghaecloncodingjeongyookgak.model.CategoryImage;
 import com.hanghae.hanghaecloncodingjeongyookgak.model.Product;
 import com.hanghae.hanghaecloncodingjeongyookgak.service.ProductService;
 import org.springframework.web.bind.annotation.*;
@@ -32,5 +34,11 @@ public class ProductController {
     @PostMapping("/api/product")
     public Product createProduct(@RequestBody ProductRequestDto ProductRequestDto) {
         return productService.createProduct(ProductRequestDto);
+    }
+
+    // 카테고리별 메인 이미지 등록
+    @PostMapping("/api/category/image")
+    public CategoryImage createCategoryImage(@RequestBody CategoryImageRequestDto categoryImage) {
+        return productService.createCategoryImage(categoryImage);
     }
 }
