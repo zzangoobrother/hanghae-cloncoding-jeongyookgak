@@ -32,7 +32,7 @@ public class JwtTokenProvider {
     @PostConstruct
     protected  void init(){
 
-        secretkey = Base64.getEncoder().encodeToString(secretkey.getBytes(StandardCharsets.UTF_8));
+        secretkey = Base64.getEncoder().encodeToString(secretkey.getBytes());
     }
 
 
@@ -46,7 +46,7 @@ public class JwtTokenProvider {
                 .setClaims(claims)
                 .setIssuedAt(now)
                 .setExpiration(new Date(now.getTime() + tokenValidTime))
-                .signWith(SignatureAlgorithm.ES256, secretkey)
+                .signWith(SignatureAlgorithm.HS256, secretkey)
                 .compact();
     }
 
