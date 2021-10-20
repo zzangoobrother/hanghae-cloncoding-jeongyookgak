@@ -7,7 +7,6 @@ import com.hanghae.hanghaecloncodingjeongyookgak.exception.HanghaeClonException;
 import com.hanghae.hanghaecloncodingjeongyookgak.model.User;
 import com.hanghae.hanghaecloncodingjeongyookgak.security.UserDetailsImpl;
 import com.hanghae.hanghaecloncodingjeongyookgak.security.jwt.JwtTokenProvider;
-import com.hanghae.hanghaecloncodingjeongyookgak.security.jwt.JwtTokenProvider;
 import com.hanghae.hanghaecloncodingjeongyookgak.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -24,13 +23,11 @@ public class UserController {
     private final UserService userService;
     private final JwtTokenProvider jwtTokenProvider;
 
-
     @Autowired
     public UserController(UserService userService, JwtTokenProvider jwtTokenProvider) {
         this.userService = userService;
         this.jwtTokenProvider = jwtTokenProvider;
     }
-
 
     //가입 요청
     @PostMapping("/api/signup")
