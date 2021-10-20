@@ -9,7 +9,6 @@ public class CartResponseDto {
     private Long price;
     private String image;
 
-
     public CartResponseDto(Long id, String title, Long price, String image) {
         this.id = id;
         this.title = title;
