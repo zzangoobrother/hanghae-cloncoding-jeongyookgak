@@ -29,7 +29,6 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
-    implementation group: 'org.apache.commons', name: 'commons-text', version: '1.8'
     implementation 'io.jsonwebtoken:jjwt:0.9.1'
 
 
