@@ -29,21 +29,21 @@ public class CartService {
         this.cartRepository = cartRepository;
         this.productRepository = productRepository;
         this.userRepository = userRepository;
-}
+    }
 
     @Transactional
     public List<Map<String,Object>> addCart(CartRequestDto cartRequestDto,UserDetailsImpl userDetails) {
-    Long productId = cartRequestDto.getProductId();
-    Long cartCount = cartRequestDto.getCount();
-    String nickname = userDetails.getUser().getNickname();
+        Long productId = cartRequestDto.getProductId();
+        Long cartCount = cartRequestDto.getCount();
+        String nickname = userDetails.getUser().getNickname();
 
-    User user = userRepository.findByNickname(nickname). orElseThrow(()->
-        new IllegalArgumentException("올바른 아이디가 아닙니다."));
-    Product product = productRepository.findById(productId). orElseThrow(() ->
-                    new HanghaeClonException(ErrorCode.PRODUCT_NOT_FOUND));
+        User user = userRepository.findByNickname(nickname). orElseThrow(()->
+                new IllegalArgumentException("올바른 아이디가 아닙니다."));
+        Product product = productRepository.findById(productId). orElseThrow(() ->
+                new HanghaeClonException(ErrorCode.PRODUCT_NOT_FOUND));
 
-    Cart cart = new Cart(cartCount,product,user);
-    Cart findCart = cartRepository.findByProductIdAndUserId(productId, user.getId()).orElse(null);
+        Cart cart = new Cart(cartCount,product,user);
+        Cart findCart = cartRepository.findByProductIdAndUserId(productId, user.getId()).orElse(null);
         if (findCart != null) {
             cartCount= findCart.getCartCount() + cart.getCartCount();
             findCart.setCartCount(cartCount);
@@ -66,14 +66,14 @@ public class CartService {
                 cartCount*cart.getProduct().getPrice()
         );
 
-      List<Map<String, Object>> addObject = new ArrayList<>();
-      Map<String,Object> responseDtoMap = new HashMap<String ,Object>();
-      Map<String,Object> responsePriceMap = new HashMap<String ,Object>();
-      Map<String,Object> responseMessage  = new HashMap<String ,Object>();
+        List<Map<String, Object>> addObject = new ArrayList<>();
+        Map<String,Object> responseDtoMap = new HashMap<String ,Object>();
+        Map<String,Object> responsePriceMap = new HashMap<String ,Object>();
+        Map<String,Object> responseMessage  = new HashMap<String ,Object>();
 
-      responseDtoMap.put("cart",cartResponseDto);
-      responsePriceMap.put("totalPrice", totalPrice);
-      responseMessage.put("result","success");
+        responseDtoMap.put("cart",cartResponseDto);
+        responsePriceMap.put("totalPrice", totalPrice);
+        responseMessage.put("result","success");
 
 
         addObject.add(responseDtoMap);
@@ -123,7 +123,7 @@ public class CartService {
     }
 
     @Transactional
-    public List<Map<String, Object>> editCart(CartRequestDto cartRequestDto) {
+    public List<Map<String, Object>> editCart(CartRequestDto cartRequestDto, UserDetailsImpl userDetails) {
         Long productId = cartRequestDto.getProductId();
         Long cartCount = cartRequestDto.getCount();
         Product product = productRepository.findById(productId). orElseThrow(() ->
@@ -131,7 +131,7 @@ public class CartService {
 
         Long totalPrice = cartCount * product.getPrice();
 
-        Cart cart = cartRepository.findByProductId(productId) . orElseThrow(() ->
+        Cart cart = cartRepository.findByProductIdAndUserId(productId,userDetails.getUser().getId()) . orElseThrow(() ->
                 new HanghaeClonException(ErrorCode.CART_NOT_FOUND));
         ;
         cart.setCartCount(cartCount);
