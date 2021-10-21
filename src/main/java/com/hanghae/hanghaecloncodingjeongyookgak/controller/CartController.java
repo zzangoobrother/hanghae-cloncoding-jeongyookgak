@@ -20,7 +20,7 @@ public class CartController {
 
 
     @PostMapping("/api/cart")
-    public List<Map<String, Object>> addCart(@AuthenticationPrincipal UserDetailsImpl userDetails, @RequestBody CartRequestDto cartRequestDto){
+    public List<Map<String, Object>> addCart(@RequestBody CartRequestDto cartRequestDto, @AuthenticationPrincipal UserDetailsImpl userDetails){
 
         return cartService.addCart(cartRequestDto, userDetails);
     }
@@ -38,8 +38,14 @@ public class CartController {
         return cartService.editCart(cartRequestDto);
     }
 
-    @DeleteMapping("/api/cart")
-    public Map<String,String> deleteCart(@RequestBody CartRequestDto cartRequestDto){
-        return cartService.deleteCart(cartRequestDto);
+    @DeleteMapping("/api/cart/{productId}")
+
+    public Map<String,String> deleteCart(@PathVariable Long productId){
+        return cartService.deleteCart(productId);
     }
+
+
+
+
+
 }

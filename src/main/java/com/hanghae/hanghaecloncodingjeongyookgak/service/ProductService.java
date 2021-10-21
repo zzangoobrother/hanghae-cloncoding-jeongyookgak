@@ -4,13 +4,16 @@ import com.hanghae.hanghaecloncodingjeongyookgak.dto.CategoryImageRequestDto;
 import com.hanghae.hanghaecloncodingjeongyookgak.dto.ProductRequestDto;
 import com.hanghae.hanghaecloncodingjeongyookgak.exception.ErrorCode;
 import com.hanghae.hanghaecloncodingjeongyookgak.exception.HanghaeClonException;
+import com.hanghae.hanghaecloncodingjeongyookgak.model.Cart;
 import com.hanghae.hanghaecloncodingjeongyookgak.model.CategoryImage;
 import com.hanghae.hanghaecloncodingjeongyookgak.model.Product;
 import com.hanghae.hanghaecloncodingjeongyookgak.model.ProductCategory;
+import com.hanghae.hanghaecloncodingjeongyookgak.repository.CartRepository;
 import com.hanghae.hanghaecloncodingjeongyookgak.repository.CategoryImageRepository;
 import com.hanghae.hanghaecloncodingjeongyookgak.repository.ProductRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,15 +23,33 @@ public class ProductService {
 
     private final ProductRepository productRepository;
     private final CategoryImageRepository categoryImageRepository;
+    private final CartRepository cartRepository;
 
-    public ProductService(ProductRepository productRepository, CategoryImageRepository categoryImageRepository) {
+    public ProductService(ProductRepository productRepository, CategoryImageRepository categoryImageRepository, CartRepository cartRepository) {
         this.productRepository = productRepository;
         this.categoryImageRepository = categoryImageRepository;
+        this.cartRepository = cartRepository;
     }
 
     public List<Product> home() {
-        // todo 장바구니 큰순서대로 6개 조회
-        return productRepository.findAllByCategory(ProductCategory.PORK);
+        List<Cart> carts = cartRepository.findAllByOrderByCartCountDesc();
+        int size = 0;
+        if (carts.size() > 0) {
+            size = carts.size() >= 6 ? 6 : carts.size();
+        }
+
+        List<Product> products = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
+            Cart cart = carts.get(i);
+
+            Product product = productRepository.findById(cart.getProduct().getId()).orElseThrow(
+                    () -> new HanghaeClonException(ErrorCode.PRODUCT_NOT_FOUND)
+            );
+
+            products.add(product);
+        }
+
+        return products;
     }
 
     public Map<String, Object> getCategoryProducts(String category) {

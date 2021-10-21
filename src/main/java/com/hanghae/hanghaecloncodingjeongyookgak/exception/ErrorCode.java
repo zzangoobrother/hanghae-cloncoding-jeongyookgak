@@ -12,8 +12,6 @@ public enum  ErrorCode {
 
     PRODUCT_NOT_FOUND(BAD_REQUEST, "해당 상품이 없습니다."),
     CART_NOT_FOUND(BAD_REQUEST, "해당 장바구니 상품이 없습니다."),
-
-
     EMAIL_DUPLICATE(BAD_REQUEST, "중복된 email이 존재합니다."),
     USER_NOT_FOUND(BAD_REQUEST, "회원 정보를 찾을 수 없습니다."),
 
