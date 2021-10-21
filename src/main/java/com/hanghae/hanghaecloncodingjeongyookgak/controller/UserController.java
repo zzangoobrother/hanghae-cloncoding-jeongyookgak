@@ -78,8 +78,8 @@ public class UserController {
 //        data.add(reponseNickname);
 //        data.add(reponseMessage);
 
-        return data;
+//        return data;
 
-//        return result;
+        return result;
     }
 }
