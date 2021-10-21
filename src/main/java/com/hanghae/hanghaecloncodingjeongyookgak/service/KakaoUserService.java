@@ -24,6 +24,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.UUID;
 
+@Service
 public class KakaoUserService {
     private final PasswordEncoder passwordEncoder;
     private final UserRepository userRepository;

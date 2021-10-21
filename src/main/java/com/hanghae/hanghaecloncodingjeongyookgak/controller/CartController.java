@@ -39,8 +39,6 @@ public class CartController {
     }
 
     @DeleteMapping("/api/cart/{productId}")
-    public Map<String,String> deleteCart(@PathVariable Long productId){
-        return cartService.deleteCart(productId);
 
     public Map<String,String> deleteCart(@PathVariable Long productId, @AuthenticationPrincipal UserDetailsImpl userDetails){
         return cartService.deleteCart(productId, userDetails);
