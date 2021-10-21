@@ -89,6 +89,8 @@ public class UserService {
             result.put("message", "중복된 email이 있습니다.");
             return result;
         }
+
+
         //닉네임 중복
         public Map<String, String> sameNickname (SignUpRequestDto signUpRequestDto){
             User user = userRepository.findByNickname(signUpRequestDto.getNickname()).orElseThrow(null);
