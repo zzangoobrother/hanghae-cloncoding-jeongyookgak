@@ -35,34 +35,35 @@ public class CartService {
     Long productId = cartRequestDto.getProductId();
     Long cartCount = cartRequestDto.getCount();
     String nickname = userDetails.getUser().getNickname();
-
+    Long id = 0L;
     User user = userRepository.findByNickname(nickname). orElseThrow(()->
         new IllegalArgumentException("올바른 아이디가 아닙니다."));
-
     Product product = productRepository.findById(productId). orElseThrow(() ->
                     new HanghaeClonException(ErrorCode.PRODUCT_NOT_FOUND));
-
     Cart cart = new Cart(cartCount,product,user);
-
     Cart findCart = cartRepository.findByProductId(productId).orElse(null);
         if (findCart != null) {
             cartCount= findCart.getCartCount() + cart.getCartCount();
             findCart.setCartCount(cartCount);
             cartRepository.save(findCart);
+            id = findCart.getId();
 
         }
         else {
             cartRepository.save(cart);
+            id = cart.getId();
         }
 
 
         Long totalPrice = cartCount * product.getPrice();
 
         CartResponseDto cartResponseDto = new CartResponseDto(
-                cart.getId(),
+                id,
                 cart.getProduct().getTitle(),
                 cart.getProduct().getPrice(),
-                cart.getProduct().getImage()
+                cart.getProduct().getImage(),
+                cartCount,
+                cartCount*cart.getProduct().getPrice()
         );
 
       List<Map<String, Object>> addObject = new ArrayList<>();
@@ -95,7 +96,9 @@ public class CartService {
                     cart.getProduct().getId(),
                     cart.getProduct().getTitle(),
                     cart.getProduct().getPrice(),
-                    cart.getProduct().getImage()
+                    cart.getProduct().getImage(),
+                    cart.getCartCount(),
+                    cart.getCartCount()*cart.getProduct().getPrice()
             );
 
             Long price = cart.getProduct().getPrice() * cart.getCartCount();
