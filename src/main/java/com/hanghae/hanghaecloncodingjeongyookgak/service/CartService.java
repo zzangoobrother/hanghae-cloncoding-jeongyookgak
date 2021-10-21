@@ -12,6 +12,7 @@ import com.hanghae.hanghaecloncodingjeongyookgak.repository.CartRepository;
 import com.hanghae.hanghaecloncodingjeongyookgak.repository.ProductRepository;
 import com.hanghae.hanghaecloncodingjeongyookgak.repository.UserRepository;
 import com.hanghae.hanghaecloncodingjeongyookgak.security.UserDetailsImpl;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -151,12 +152,15 @@ public class CartService {
     }
 
 
-    public Map<String, String> deleteCart(Long productId) {
-        cartRepository.deleteByProductId(productId);
+    @Transactional
+    public Map<String, String> deleteCart(Long productId ,@AuthenticationPrincipal UserDetailsImpl userDetails) {
+        User user = userDetails.getUser();
+        cartRepository.deleteByProductIdAndUserId(productId,user.getId());
 
         Map<String,String> deleteObject = new HashMap<>();
         deleteObject.put("result", "success");
 
         return deleteObject;
     }
+
 }
