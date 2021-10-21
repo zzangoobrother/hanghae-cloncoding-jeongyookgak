@@ -34,8 +34,8 @@ public class CartController {
 
     @PutMapping("/api/cart")
 
-    public List<Map<String,Object>> editCart(@RequestBody CartRequestDto cartRequestDto){
-        return cartService.editCart(cartRequestDto);
+    public List<Map<String,Object>> editCart(@RequestBody CartRequestDto cartRequestDto,@AuthenticationPrincipal UserDetailsImpl userDetails){
+        return cartService.editCart(cartRequestDto, userDetails);
     }
 
     @DeleteMapping("/api/cart/{productId}")
@@ -43,4 +43,9 @@ public class CartController {
     public Map<String,String> deleteCart(@PathVariable Long productId, @AuthenticationPrincipal UserDetailsImpl userDetails){
         return cartService.deleteCart(productId, userDetails);
     }
+
+
+
+
+
 }
