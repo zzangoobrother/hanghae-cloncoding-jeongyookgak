@@ -39,13 +39,7 @@ public class CartController {
     }
 
     @DeleteMapping("/api/cart")
-
     public Map<String,String> deleteCart(@RequestBody CartRequestDto cartRequestDto){
         return cartService.deleteCart(cartRequestDto);
     }
-
-
-
-
-
 }

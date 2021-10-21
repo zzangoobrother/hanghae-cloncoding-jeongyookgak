@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 @RestController
 public class UserController {
@@ -65,6 +67,19 @@ public class UserController {
         result.put("nickname", userDetails.getUser().getNickname());
         result.put("result", "success");
 
-        return result;
+//        List<Map<String,String>> data = new ArrayList<>();
+//        Map<String,String> reponseEmail = new HashMap<>();
+//        Map<String,String> reponseNickname = new HashMap<>();
+//        Map<String,String> reponseMessage = new HashMap<>();
+//        reponseEmail.put("email", userDetails.getUser().getEmail());
+//        reponseNickname.put("nickname", userDetails.getUser().getNickname());
+//        reponseMessage.put("status", "success");
+//        data.add(reponseEmail);
+//        data.add(reponseNickname);
+//        data.add(reponseMessage);
+
+        return data;
+
+//        return result;
     }
 }
