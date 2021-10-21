@@ -7,7 +7,6 @@ import com.hanghae.hanghaecloncodingjeongyookgak.exception.HanghaeClonException;
 import com.hanghae.hanghaecloncodingjeongyookgak.model.User;
 import com.hanghae.hanghaecloncodingjeongyookgak.security.UserDetailsImpl;
 import com.hanghae.hanghaecloncodingjeongyookgak.security.jwt.JwtTokenProvider;
-import com.hanghae.hanghaecloncodingjeongyookgak.security.jwt.JwtTokenProvider;
 import com.hanghae.hanghaecloncodingjeongyookgak.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,7 +16,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 @RestController
 public class UserController {
@@ -25,13 +26,11 @@ public class UserController {
     private final UserService userService;
     private final JwtTokenProvider jwtTokenProvider;
 
-
     @Autowired
     public UserController(UserService userService, JwtTokenProvider jwtTokenProvider) {
         this.userService = userService;
         this.jwtTokenProvider = jwtTokenProvider;
     }
-
 
     //가입 요청
     @PostMapping("/api/signup")
@@ -67,6 +66,19 @@ public class UserController {
         result.put("email", userDetails.getUser().getEmail());
         result.put("nickname", userDetails.getUser().getNickname());
         result.put("result", "success");
+
+//        List<Map<String,String>> data = new ArrayList<>();
+//        Map<String,String> reponseEmail = new HashMap<>();
+//        Map<String,String> reponseNickname = new HashMap<>();
+//        Map<String,String> reponseMessage = new HashMap<>();
+//        reponseEmail.put("email", userDetails.getUser().getEmail());
+//        reponseNickname.put("nickname", userDetails.getUser().getNickname());
+//        reponseMessage.put("status", "success");
+//        data.add(reponseEmail);
+//        data.add(reponseNickname);
+//        data.add(reponseMessage);
+
+//        return data;
 
         return result;
     }

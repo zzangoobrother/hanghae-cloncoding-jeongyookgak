@@ -85,6 +85,7 @@ public class UserService {
                 result.put("result", "success");
                 return result;
             }
+
             result.put("result", "fail");
             result.put("message", "중복된 email이 있습니다.");
             return result;
