@@ -152,7 +152,7 @@ public class CartService {
     }
 
 
-
+    @Transactional
     public Map<String, String> deleteCart(Long productId ,@AuthenticationPrincipal UserDetailsImpl userDetails) {
         User user = userDetails.getUser();
         cartRepository.deleteByProductIdAndUserId(productId,user.getId());
