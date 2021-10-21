@@ -151,8 +151,7 @@ public class CartService {
     }
 
 
-    public Map<String, String> deleteCart(CartRequestDto cartRequestDto) {
-        Long productId = cartRequestDto.getProductId();
+    public Map<String, String> deleteCart(Long productId) {
         cartRepository.deleteByProductId(productId);
 
         Map<String,String> deleteObject = new HashMap<>();
