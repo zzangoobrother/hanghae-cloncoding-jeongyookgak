@@ -1,11 +1,12 @@
 # 14조 정육각
 
 ### Team
-+ Frontend : 고규식, 김기철, 노강표
-+ Backend : 권민혁, 박시준, 최선강
++ Frontend 개발자 : 고규식, 김기철, 노강표
++ Backend 개발자 : 권민혁, 박시준, 최선강
 + 개발기간 : 2021.10.18 ~ 2021.10.22
-+ Frontend : HTML / CSS / JAVASCRIPT / REACT
-+ Backend : JAVA / SPRINGBOOT / MYSQL / AWS
++ 개발언어
+  + Frontend : HTML / CSS / JAVASCRIPT / REACT
+  + Backend : JAVA / SPRINGBOOT / MYSQL / AWS
 
 ### Objective
 1. Frontend와 Backend 다른환경에서 연동 (CORS)
