@@ -15,12 +15,13 @@
 <summary>
 API설계
 </summary>
+[API설계](https://www.notion.so/f2d135f6a3a041c2927b8819cb6aff9d) 
  <div style="width:700px; margin: auto" >
 
 ### 로그인/회원가입
-|기능　　　　　|Method|URL|Request|Response|
-|---|---|---|---|---|
-|로그인|POST|/api/login|{ email: email< String >,<br>pw:pw < String >}|{email:email< String >, <br>nickname:nickname< String >,<br>result:"success"< String >,<br>token:token< String >,<br>nickname:nickname < String >}<br>{result:fail < String >,<br>errorMessage:""< String >,<br>httpStatus:"BAD_REQUEST"< String > }
+|URL　　　　　|Method|설명|
+|---|---|---|
+|/api/login|POST|로그인|
 |회원가입|POST|/signup|{email:email< String > ,<br>pw:pw< String > pwCheck:pwCheck< String > <br>nickname:nickname< String >}|{result:success< String > <br> result:fail< String >}|
 |아이디 중복확인|POST|/signup/duplicate_id|{ email:email < String > }|{result:success< String > ,<br> result:fail< String >}|
 |닉네임 중복확인|POST|signup/duplicate_nickname|{ nickname:nickname < String > }|{reslu:success< String>}<br>{result:fail< String > }|
