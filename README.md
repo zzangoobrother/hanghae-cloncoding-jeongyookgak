@@ -47,6 +47,12 @@ Diagrams
 문제점 / 해결과정
 </summary>
 
+## ERROR_CONNECTION_REFUSED
++ Spring의 port와 aws의 port가 상이하여 나는 에러였다. Spring port를 8090으로 변경하여 배포 후 서버에서 실행, 웹사이트에서 테스트를 하면 ERROR_CONNECTION_REFUSED 오류가 나타났다.
+  aws에서는 포트를 80, 8080, 3306의 포트만 오픈해서 port 불일치 때문이었다. Spring에서 8090 port 설정을 주석처리 후 재 빌드하고 서버에 배포하니 정상으로 동작하였다.
+  다음부터는 빌드하기 전 Spring 설정이 제대로 되어있는지 확인 후 빌드를 해야겠습니다.
+
+
 ## 카카오 로그인
 <div style="width: 700px; margin: 20px auto" >
 <img src = "https://media.vlpt.us/images/junseokoo/post/2e4ee263-f81b-4144-9d54-4c58c6a2b57b/qwert.PNG">
