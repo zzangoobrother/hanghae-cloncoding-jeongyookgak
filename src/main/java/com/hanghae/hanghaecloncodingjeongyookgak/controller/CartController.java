@@ -39,10 +39,10 @@ public class CartController {
         return cartService.editCart(cartRequestDto, userDetails);
     }
 
-    @DeleteMapping("/api/cart/{productId}")
+    @DeleteMapping("/api/cart/{Id}")
 
-    public Map<String,String> deleteCart(@PathVariable Long productId, @AuthenticationPrincipal UserDetailsImpl userDetails){
-        return cartService.deleteCart(productId, userDetails);
+    public Map<String,String> deleteCart(@PathVariable Long Id){
+        return cartService.deleteCart(Id);
     }
 
 

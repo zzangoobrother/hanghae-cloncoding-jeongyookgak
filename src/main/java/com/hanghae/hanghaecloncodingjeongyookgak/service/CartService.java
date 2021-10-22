@@ -154,10 +154,12 @@ public class CartService {
 
 
     @Transactional
-    public Map<String, String> deleteCart(Long productId ,@AuthenticationPrincipal UserDetailsImpl userDetails) {
-        User user = userDetails.getUser();
-        cartRepository.deleteByProductIdAndUserId(productId,user.getId());
+    public Map<String, String> deleteCart(Long Id) {
 
+        Cart cart = cartRepository.findById(Id). orElseThrow(() ->
+                new HanghaeClonException(ErrorCode.CART_NOT_FOUND));
+
+        cartRepository.deleteById(Id);
         Map<String,String> deleteObject = new HashMap<>();
         deleteObject.put("result", "success");
 
