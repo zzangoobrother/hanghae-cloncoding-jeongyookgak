@@ -53,30 +53,30 @@ public class KakaoUserService {
     private String getAccessToken(String code) throws JsonProcessingException {
         //HTTP Header 생성
         HttpHeaders headers = new HttpHeaders();
-        headers.add("content-type", "application/x-ww-form-urlencoded;charset=utf-8");
+        headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
 
         //HTTP Body 생성
         MultiValueMap<String,String> body = new LinkedMultiValueMap<>();
-        body.add("gran_type", "authorization_code");
-        body.add("clint_id", "d61dfbb6d55458dae646635fb1fbb89d");
+        body.add("grant_type", "authorization_code");
+        body.add("client_id", "d61dfbb6d55458dae646635fb1fbb89d");
         body.add("redirect_uri", "http://localhost:3000/user/kakao/callback");
         body.add("code", code);
 
         //HTTP 요청 보내기
-        HttpEntity<MultiValueMap<String,String>> kakaoTokenRequest =
+        HttpEntity<MultiValueMap<String, String>> kakaoTokenRequest =
                 new HttpEntity<>(body, headers);
         RestTemplate rt = new RestTemplate();
         ResponseEntity<String> response = rt.exchange(
-                "http://kauth.kakao.com/oauth/token",
+                "https://kauth.kakao.com/oauth/token",
                 HttpMethod.POST,
                 kakaoTokenRequest,
                 String.class
         );
 
         // HTTP 응답 (JSON) -> 액세스 토큰 파싱
-        String reponseBody = response.getBody();
+        String responseBody = response.getBody();
         ObjectMapper objectMapper = new ObjectMapper();
-        JsonNode jsonNode = objectMapper.readTree(reponseBody);
+        JsonNode jsonNode = objectMapper.readTree(responseBody);
         return jsonNode.get("access_token").asText();
     }
 
