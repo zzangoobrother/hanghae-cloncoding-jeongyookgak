@@ -59,6 +59,7 @@ public class CartService {
 
         CartResponseDto cartResponseDto = new CartResponseDto(
                 findCart.getId(),
+                findCart.getProduct().getId(),
                 findCart.getProduct().getTitle(),
                 findCart.getProduct().getPrice(),
                 findCart.getProduct().getImage(),
@@ -93,6 +94,7 @@ public class CartService {
 
         for (Cart cart : carts) {
             CartResponseDto cartResponseDto = new CartResponseDto(
+                    cart.getProduct().getId(),
                     cart.getProduct().getId(),
                     cart.getProduct().getTitle(),
                     cart.getProduct().getPrice(),
