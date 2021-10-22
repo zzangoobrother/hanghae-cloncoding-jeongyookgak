@@ -15,7 +15,7 @@
 <summary>
 API설계
 </summary>
-[NOTION](https://www.notion.so/f2d135f6a3a041c2927b8819cb6aff9d) 
+[NOTION] (https://www.notion.so/f2d135f6a3a041c2927b8819cb6aff9d) 
  <div style="width:700px; margin: auto" >
 
 ### 
