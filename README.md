@@ -69,4 +69,4 @@ Diagrams
 
 </details>
 
-[유튜브영상](https://www.youtube.com/watch?v=QefErMZS8lg)
+[유튜브영상]()
