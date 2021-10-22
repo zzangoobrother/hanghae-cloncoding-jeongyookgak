@@ -18,9 +18,10 @@ API설계
 [NOTION](https://www.notion.so/f2d135f6a3a041c2927b8819cb6aff9d) 
  <div style="width:700px; margin: auto" >
 
-### 로그인/회원가입
+### 
 |URL　　　　　|Method|설명|
 |---|---|---|
+|로그인/회원가입|
 |/api/login|POST|로그인|
 |/api/signup|POST|회원가입|
 |/user/kakao/callback|GET|카카오 로그인|
