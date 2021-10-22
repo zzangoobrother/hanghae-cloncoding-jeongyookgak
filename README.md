@@ -34,3 +34,10 @@ API설계
 |/api/cart|DELETE|장바구니 상품 삭제|
 
  </div></details>
+
+<details markdown = "1">
+<summary>
+Diagrams
+</summary>
+<img src= "https://user-images.githubusercontent.com/42162127/138402585-76a4add3-c741-44a5-8dd0-aa004123fac4.PNG">
+ </div></details>
