@@ -26,25 +26,13 @@ API설계
 |/api/signup|POST|회원가입|
 |/user/kakao/callback|GET|카카오 로그인|
 |/api/login/check|POST|로그인 체크|
-
-### 메인페이지
-|URL　　　　　|Method|설명|
-|---|---|---|
+|메인페이지|
 |/|GET|메인 리스트|
- 
-### 쇼핑하기 페이지
-|URL　　　　　|Method|설명|
-|---|---|---|
+|쇼핑하기 페이지|
 |/api/list?category={category}|GET|쇼핑하기 리스트|
-
-### 상세페이지
-|URL　　　　　|Method|설명|
-|---|---|---|
+|상세페이지|
 |/api/detail?productId={productId}|GET|상품 단건 조회|
- 
- ### 장바구니 페이지
-|URL　　　　　|Method|설명|
-|---|---|---|
+|장바구니 페이지|
 |/api/cart|GET|장바구니 조회|
 |/api/cart|POST|장바구니 추가|
 |/api/cart|PUT|장바구니 수량 변경|
